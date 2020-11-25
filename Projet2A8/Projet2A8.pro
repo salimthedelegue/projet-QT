@@ -1,4 +1,5 @@
 QT       += core gui
+QT += printsupport
 QT += widgets multimedia
 QT += sql
 CONFIG += console

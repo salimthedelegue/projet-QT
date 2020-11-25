@@ -41,6 +41,16 @@ private slots:
 
     void on_Return1_clicked();
 
+    void on_Recherche_Vehicule_clicked();
+
+    void on_Recherche_Parking_clicked();
+
+    void on_Trier_Vehicule_clicked();
+
+    void on_Trier_Parking_clicked();
+
+    void on_Imprimer_Parking_clicked();
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer * click;
