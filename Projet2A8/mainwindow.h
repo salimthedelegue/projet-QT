@@ -51,6 +51,8 @@ private slots:
 
     void on_Imprimer_Parking_clicked();
 
+    void on_Imprimer_vehicule_clicked();
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer * click;
