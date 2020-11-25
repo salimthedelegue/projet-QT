@@ -198,10 +198,43 @@ void MainWindow::on_Ajouter_Parking_clicked()
     click->setMedia(QUrl("qrc:/sounds/mouse_click.wav"));
     click->play();
 
+    bool control=true;
+
     int R =ui->lineEditreff->text().toInt();
+    if(R<0 || R>9999)
+       { //control de saisie
+           control = false;
+           QMessageBox::critical(nullptr, QObject::tr("Ajouter reference Parking"),
+                       QObject::tr("reference invlide!\n"
+                                   "Click Ok to close."), QMessageBox::Ok);
+       }
+
     QString A =ui->lineEditAdresse->text();
+    if(A=="")
+        {
+            control = false;
+            QMessageBox::critical(nullptr, QObject::tr("Ajouter une Adresse "),
+                        QObject::tr("Adresse vide!\n"
+                                    "Click Ok to close."), QMessageBox::Ok);
+        }
+
     int nb = ui->lineEditNbplace->text().toInt();
+    if(nb<0 ||nb>100){
+        control = false;
+        QMessageBox::critical(nullptr, QObject::tr("Ajouter nombre de place parking"),
+                    QObject::tr("Nombre de place max est 100!\n"
+                                "Click Ok to close."), QMessageBox::Ok);
+       }
     QString n= ui->lineEditNom->text();
+    if(n=="")
+        {
+            control = false;
+            QMessageBox::critical(nullptr, QObject::tr("Ajouter un nom "),
+                        QObject::tr("Nom vide!\n"
+                                    "Click Ok to close."), QMessageBox::Ok);
+        }
+    if (control==true)
+        {
 
     Parking P(R,n,A,nb);
     bool test=P.ajouter();
@@ -211,6 +244,10 @@ void MainWindow::on_Ajouter_Parking_clicked()
                                  QObject::tr("parking ajouté.\n"
                                              "Click to exit"), QMessageBox::Cancel);
     }
+    }else
+QMessageBox::critical(nullptr, QObject::tr("Ajouter un Parking"),
+            QObject::tr("Erreur !.\n"
+                        "Click Ok to close."), QMessageBox::Ok);
 }
 
 void MainWindow::on_Modifier_Parking_clicked()
@@ -220,16 +257,38 @@ void MainWindow::on_Modifier_Parking_clicked()
     click->play();
     bool control=true;
     int R =ui->lineEditreff_2->text().toInt();
+    if(R<0 || R>9999)
+       { //control de saisie
+           control = false;
+           QMessageBox::critical(nullptr, QObject::tr("Modifier reference Parking"),
+                       QObject::tr("reference invlide!\n"
+                                   "Click Ok to close."), QMessageBox::Ok);
+       }
     QString A =ui->lineEditAdresse_2->text();
+    if(A=="")
+        {
+            control = false;
+            QMessageBox::critical(nullptr, QObject::tr("Modifier une Adresse "),
+                        QObject::tr("Adresse vide!\n"
+                                    "Click Ok to close."), QMessageBox::Ok);
+        }
     int nb = ui->lineEditNbplace_2->text().toInt();
     if(nb<0 ||nb>100){
         control = false;
-        QMessageBox::critical(nullptr, QObject::tr("Ajouter nombre de place parking"),
+        QMessageBox::critical(nullptr, QObject::tr("Modifier nombre de place parking"),
                     QObject::tr("Nombre de place max est 100!\n"
                                 "Click Ok to close."), QMessageBox::Ok);
     QString n= ui->lineEditNom_2->text();
+    if(n=="")
+        {
+            control = false;
+            QMessageBox::critical(nullptr, QObject::tr("Modifier un nom "),
+                        QObject::tr("Nom vide!\n"
+                                    "Click Ok to close."), QMessageBox::Ok);
+        }
     if (control==true)
-    {
+        {
+
     Parking P(R,n,A,nb);
     bool test=P.modifier();
     if (test)
