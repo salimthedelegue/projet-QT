@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[13];
-    char stringdata0[292];
+    QByteArrayData data[19];
+    char stringdata0[459];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,7 +43,13 @@ QT_MOC_LITERAL(8, 171, 17), // "on_Return_clicked"
 QT_MOC_LITERAL(9, 189, 26), // "on_Ajouter_Parking_clicked"
 QT_MOC_LITERAL(10, 216, 27), // "on_Modifier_Parking_clicked"
 QT_MOC_LITERAL(11, 244, 28), // "on_Supprimer_Parking_clicked"
-QT_MOC_LITERAL(12, 273, 18) // "on_Return1_clicked"
+QT_MOC_LITERAL(12, 273, 18), // "on_Return1_clicked"
+QT_MOC_LITERAL(13, 292, 29), // "on_Recherche_Vehicule_clicked"
+QT_MOC_LITERAL(14, 322, 28), // "on_Recherche_Parking_clicked"
+QT_MOC_LITERAL(15, 351, 25), // "on_Trier_Vehicule_clicked"
+QT_MOC_LITERAL(16, 377, 24), // "on_Trier_Parking_clicked"
+QT_MOC_LITERAL(17, 402, 27), // "on_Imprimer_Parking_clicked"
+QT_MOC_LITERAL(18, 430, 28) // "on_Imprimer_vehicule_clicked"
 
     },
     "MainWindow\0on_GestionVehicules_clicked\0"
@@ -54,7 +60,12 @@ QT_MOC_LITERAL(12, 273, 18) // "on_Return1_clicked"
     "on_Return_clicked\0on_Ajouter_Parking_clicked\0"
     "on_Modifier_Parking_clicked\0"
     "on_Supprimer_Parking_clicked\0"
-    "on_Return1_clicked"
+    "on_Return1_clicked\0on_Recherche_Vehicule_clicked\0"
+    "on_Recherche_Parking_clicked\0"
+    "on_Trier_Vehicule_clicked\0"
+    "on_Trier_Parking_clicked\0"
+    "on_Imprimer_Parking_clicked\0"
+    "on_Imprimer_vehicule_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +75,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -72,19 +83,31 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x08 /* Private */,
-       3,    0,   70,    2, 0x08 /* Private */,
-       4,    0,   71,    2, 0x08 /* Private */,
-       5,    0,   72,    2, 0x08 /* Private */,
-       6,    0,   73,    2, 0x08 /* Private */,
-       7,    0,   74,    2, 0x08 /* Private */,
-       8,    0,   75,    2, 0x08 /* Private */,
-       9,    0,   76,    2, 0x08 /* Private */,
-      10,    0,   77,    2, 0x08 /* Private */,
-      11,    0,   78,    2, 0x08 /* Private */,
-      12,    0,   79,    2, 0x08 /* Private */,
+       1,    0,   99,    2, 0x08 /* Private */,
+       3,    0,  100,    2, 0x08 /* Private */,
+       4,    0,  101,    2, 0x08 /* Private */,
+       5,    0,  102,    2, 0x08 /* Private */,
+       6,    0,  103,    2, 0x08 /* Private */,
+       7,    0,  104,    2, 0x08 /* Private */,
+       8,    0,  105,    2, 0x08 /* Private */,
+       9,    0,  106,    2, 0x08 /* Private */,
+      10,    0,  107,    2, 0x08 /* Private */,
+      11,    0,  108,    2, 0x08 /* Private */,
+      12,    0,  109,    2, 0x08 /* Private */,
+      13,    0,  110,    2, 0x08 /* Private */,
+      14,    0,  111,    2, 0x08 /* Private */,
+      15,    0,  112,    2, 0x08 /* Private */,
+      16,    0,  113,    2, 0x08 /* Private */,
+      17,    0,  114,    2, 0x08 /* Private */,
+      18,    0,  115,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -117,6 +140,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->on_Modifier_Parking_clicked(); break;
         case 9: _t->on_Supprimer_Parking_clicked(); break;
         case 10: _t->on_Return1_clicked(); break;
+        case 11: _t->on_Recherche_Vehicule_clicked(); break;
+        case 12: _t->on_Recherche_Parking_clicked(); break;
+        case 13: _t->on_Trier_Vehicule_clicked(); break;
+        case 14: _t->on_Trier_Parking_clicked(); break;
+        case 15: _t->on_Imprimer_Parking_clicked(); break;
+        case 16: _t->on_Imprimer_vehicule_clicked(); break;
         default: ;
         }
     }
@@ -152,13 +181,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 17)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 17;
     }
     return _id;
 }

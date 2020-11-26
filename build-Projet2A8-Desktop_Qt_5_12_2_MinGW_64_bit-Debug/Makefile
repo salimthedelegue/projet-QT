@@ -246,6 +246,7 @@ Makefile: ../Projet2A8/Projet2A8.pro C:/QT/5.12.2/mingw73_64/mkspecs/win32-g++/q
 		C:/QT/5.12.2/mingw73_64/mkspecs/features/yacc.prf \
 		C:/QT/5.12.2/mingw73_64/mkspecs/features/lex.prf \
 		../Projet2A8/Projet2A8.pro \
+		C:/QT/5.12.2/mingw73_64/lib/Qt5PrintSupport.prl \
 		C:/QT/5.12.2/mingw73_64/lib/Qt5Widgets.prl \
 		C:/QT/5.12.2/mingw73_64/lib/Qt5Multimedia.prl \
 		C:/QT/5.12.2/mingw73_64/lib/Qt5Gui.prl \
@@ -436,6 +437,7 @@ C:/QT/5.12.2/mingw73_64/mkspecs/features/exceptions.prf:
 C:/QT/5.12.2/mingw73_64/mkspecs/features/yacc.prf:
 C:/QT/5.12.2/mingw73_64/mkspecs/features/lex.prf:
 ../Projet2A8/Projet2A8.pro:
+C:/QT/5.12.2/mingw73_64/lib/Qt5PrintSupport.prl:
 C:/QT/5.12.2/mingw73_64/lib/Qt5Widgets.prl:
 C:/QT/5.12.2/mingw73_64/lib/Qt5Multimedia.prl:
 C:/QT/5.12.2/mingw73_64/lib/Qt5Gui.prl:
