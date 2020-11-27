@@ -7,7 +7,7 @@ Vehicule::Vehicule()
     marque=".";
     type=".";
 }
-Vehicule::Vehicule(int i,QString D,QString Mat,QString Marq,QString T)
+Vehicule::Vehicule(QString D,QString Mat,QString Marq,QString T,int i)
 {
     id=i;
     date=D;
@@ -19,7 +19,7 @@ Vehicule::Vehicule(int i,QString D,QString Mat,QString Marq,QString T)
 bool Vehicule::ajouter()
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO VEHICULES (date_mise,matricule,marque,type,id) VALUES (:date_mise,:matricule,:marque,:type,:id)");
+    query.prepare("INSERT INTO VEHICULES (id,matricule,marque,type,date_mise) VALUES (:id,:matricule,:marque,:type,:date_mise)");
     QString res= QString::number(id);
     query.bindValue(":id",res);
     query.bindValue(":matricule",matricule);
@@ -32,7 +32,7 @@ bool Vehicule::ajouter()
 bool Vehicule::modifier()
 {
     QSqlQuery query;
-    query.prepare("UPDATE VEHICULES SET date_mise=:date_mise,matricule=:matricule,marque=:marque,type=:type WHERE id=:id");
+    query.prepare("UPDATE VEHICULES SET id=:id,matricule=:matricule,marque=:marque,type=:type,date_mise=:date_mise WHERE id=:id");
     QString res= QString::number(id);
     query.bindValue(":id",id);
     query.bindValue(":date_mise",date);
@@ -44,12 +44,12 @@ bool Vehicule::modifier()
 }
 
 
-bool Vehicule::supprimer(int ID)
+bool Vehicule::supprimer(int id)
 {
     QSqlQuery query ;
-    query.prepare("DELETE FROM VEHICULES where ID= :ID");
-    QString res= QString::number(ID);
-    query.bindValue(":ID",res);
+    query.prepare("delete from VEHICULES where id= :id");
+    QString res= QString::number(id);
+    query.bindValue(":id",res);
     return query.exec();
 }
 
@@ -57,7 +57,7 @@ QSqlQueryModel * Vehicule:: afficher()
 {
 
     QSqlQueryModel * model= new QSqlQueryModel();
-    model->setQuery("Select from * VEHICULES");
+    model->setQuery("Select * from  VEHICULES");
     model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
     model->setHeaderData(1,Qt::Horizontal,QObject::tr("Matricule"));
     model->setHeaderData(2,Qt::Horizontal,QObject::tr("Marque"));
@@ -84,7 +84,7 @@ QSqlQueryModel * Vehicule:: afficher()
  {
  QSqlQueryModel * model= new QSqlQueryModel();
  QString code=QString::number(id);
- model->setQuery("select * FROM PARKINGS WHERE id="+code );
+ model->setQuery("select * FROM VEHICULES WHERE id="+code );
  model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID"));
  model->setHeaderData(1,Qt::Horizontal,QObject::tr("Matricule"));
  model->setHeaderData(2,Qt::Horizontal,QObject::tr("Marque"));

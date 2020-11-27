@@ -42,11 +42,11 @@ bool Parking::modifier()
 
     return query.exec();
 }
-bool Parking::supprimer(int ref)
+bool Parking::supprimer(int reff)
 {
     QSqlQuery query ;
     query.prepare("Delete from PARKINGS where reff= :reff");
-    QString res= QString::number(ref);
+    QString res= QString::number(reff);
     query.bindValue(":reff",res);
     return query.exec();
 }
@@ -55,7 +55,7 @@ bool Parking::supprimer(int ref)
  {
 
      QSqlQueryModel * model= new QSqlQueryModel();
-     model->setQuery("Select from * PARKINGS");
+     model->setQuery("Select * from  PARKINGS");
      model->setHeaderData(0,Qt::Horizontal,QObject::tr("reff"));
      model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
      model->setHeaderData(2,Qt::Horizontal,QObject::tr("adresse"));

@@ -13,7 +13,7 @@ private:
     QString type;
 public:
     Vehicule();
-    Vehicule(int,QString,QString,QString,QString);
+    Vehicule(QString,QString,QString,QString,int);
     int getID(){return id;}
     QString getDate(){return date;}
     QString getMarque(){return marque;}

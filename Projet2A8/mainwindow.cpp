@@ -45,9 +45,9 @@ void MainWindow::on_Logout_clicked()
 
 void MainWindow::on_Ajouter_Vehicule_clicked()
 {
-    click = new QMediaPlayer();
+    /*click = new QMediaPlayer();
     click->setMedia(QUrl("qrc:/sounds/mouse_click.wav"));
-    click->play();
+    click->play();*/
     bool control=true;
     int i= ui->lineEditId->text().toInt();
     if(i<0 || i>9999)
@@ -82,7 +82,7 @@ void MainWindow::on_Ajouter_Vehicule_clicked()
                                 "Click Ok to close."), QMessageBox::Ok);
     }
     QString T = ui->lineEditType->text();
-    if(T !="Voiture"||T !="Camion"||T !="Moto")
+    if(T !="Voiture"&&T !="Camion"&& T !="Moto")
     {
         control = false;
         QMessageBox::critical(nullptr, QObject::tr("Ajouter un type "),
@@ -91,10 +91,11 @@ void MainWindow::on_Ajouter_Vehicule_clicked()
     }
     if (control==true)
     {
-    Vehicule V(i,D,Mat,Marq,T);
+    Vehicule V(D,Mat,Marq,T,i);
     bool test=V.ajouter();
     if (test)
         {
+        ui->tableView_2->setModel(tmpVehicule.afficher());
        QMessageBox::information(nullptr,QObject::tr("Ajout vehicule"),
                                 QObject::tr("Vehicule ajouté.\n"
                                             "Click to exit"), QMessageBox::Cancel);
@@ -145,19 +146,23 @@ void MainWindow::on_Modifier_Vehicule_clicked()
                                 "Click Ok to close."), QMessageBox::Ok);
     }
     QString T = ui->lineEditType_2->text();
-    if(T !="Voiture"||T !="Camion"||T !="Moto")
+    if(T !="Voiture"&& T !="Camion"&& T !="Moto")
     {
         control = false;
         QMessageBox::critical(nullptr, QObject::tr("Ajouter un type "),
                     QObject::tr("Type invalide!\n"
                                 "Click Ok to close."), QMessageBox::Ok);
     }
+    bool test1=tmpVehicule.chercher(i);
+    if(test1==true)
+    {
     if (control==true)
     {
-    Vehicule V(i,D,Mat,Marq,T);
+    Vehicule V(D,Mat,Marq,T,i);
     bool test=V.modifier();
     if (test)
         {
+        ui->tableView_2->setModel(tmpVehicule.afficher());
        QMessageBox::information(nullptr,QObject::tr("Modifier vehicule"),
                                 QObject::tr("Vehicule modifié.\n"
                                             "Click to exit"), QMessageBox::Cancel);
@@ -166,6 +171,9 @@ void MainWindow::on_Modifier_Vehicule_clicked()
         QMessageBox::critical(nullptr, QObject::tr("Modifier un vehicule"),
                     QObject::tr("Erreur !.\n"
                                 "Click Ok to close."), QMessageBox::Ok);
+    }else QMessageBox::critical(nullptr, QObject::tr("Modifier un vehicule"),
+                                QObject::tr("Vehicule non existant !.\n"
+                                            "Click Ok to close."), QMessageBox::Ok);
 }
 
 void MainWindow::on_Supprimer_vehicule_clicked()
@@ -174,13 +182,26 @@ void MainWindow::on_Supprimer_vehicule_clicked()
     click->setMedia(QUrl("qrc:/sounds/mouse_click.wav"));
     click->play();
 
-    int id= ui->Reff->text().toInt();
+    QSqlQuery query ;
+
+    int id= ui->lineEditId_3->text().toInt();
+    bool test1=tmpVehicule.chercher(id);
+    if(test1)
+    {
+
     bool test=tmpVehicule.supprimer(id);
     if(test)
+    {
+        ui->tableView_2->setModel(tmpVehicule.afficher());
 
         QMessageBox::information(nullptr,QObject::tr("Supprimer Vehicule"),
                                  QObject::tr("Vehicule suprimé.\n"
                                              "Click to exit"),QMessageBox::Cancel);
+    }
+    }else  QMessageBox::critical(nullptr, QObject::tr("Supprimer Vehicule "),
+                                 QObject::tr("Vehicule inexistant!\n"
+                                             "Click Ok to close."), QMessageBox::Ok);
+
 }
 
 void MainWindow::on_Return_clicked()
@@ -240,6 +261,7 @@ void MainWindow::on_Ajouter_Parking_clicked()
     bool test=P.ajouter();
     if (test)
     {
+        ui->tableView->setModel(tmpParking.afficher());
         QMessageBox::information(nullptr,QObject::tr("Ajout parking"),
                                  QObject::tr("parking ajouté.\n"
                                              "Click to exit"), QMessageBox::Cancel);
@@ -273,11 +295,13 @@ void MainWindow::on_Modifier_Parking_clicked()
                                     "Click Ok to close."), QMessageBox::Ok);
         }
     int nb = ui->lineEditNbplace_2->text().toInt();
-    if(nb<0 ||nb>100){
+    if(nb<0 ||nb>100)
+    {
         control = false;
         QMessageBox::critical(nullptr, QObject::tr("Modifier nombre de place parking"),
                     QObject::tr("Nombre de place max est 100!\n"
                                 "Click Ok to close."), QMessageBox::Ok);
+    }
     QString n= ui->lineEditNom_2->text();
     if(n=="")
         {
@@ -292,7 +316,9 @@ void MainWindow::on_Modifier_Parking_clicked()
     Parking P(R,n,A,nb);
     bool test=P.modifier();
     if (test)
+
     {
+        ui->tableView->setModel(tmpParking.afficher());
         QMessageBox::information(nullptr,QObject::tr("Modifier parking"),
                                  QObject::tr("parking modifié.\n"
                                              "Click to exit"), QMessageBox::Cancel);
@@ -302,7 +328,7 @@ void MainWindow::on_Modifier_Parking_clicked()
                     QObject::tr("Erreur !.\n"
                                 "Click Ok to close."), QMessageBox::Ok);
 }
-}
+
 void MainWindow::on_Supprimer_Parking_clicked()
 {
     click = new QMediaPlayer();
@@ -310,13 +336,20 @@ void MainWindow::on_Supprimer_Parking_clicked()
     click->play();
 
     int ref= ui->lineEditreff_3->text().toInt();
+    bool test1=tmpVehicule.chercher(ref);
+    if(test1){
     bool test=tmpParking.supprimer(ref);
     if(test)
     {
+        ui->tableView->setModel(tmpParking.afficher());
+
         QMessageBox::information(nullptr,QObject::tr("Supprimer parking"),
                                  QObject::tr("Parking suprimé.\n"
                                              "Click to exit"),QMessageBox::Cancel);
     }
+    }else QMessageBox::critical(nullptr, QObject::tr("Supprimer un parking"),
+                                QObject::tr("Parking inexistant !.\n"
+                                            "Click Ok to close."), QMessageBox::Ok);
 }
 
 void MainWindow::on_Return1_clicked()
@@ -332,10 +365,13 @@ void MainWindow::on_Recherche_Vehicule_clicked()
     click = new QMediaPlayer();
     click->setMedia(QUrl("qrc:/sounds/mouse_click.wav"));
     click->play();
-    int ID=ui->id->text().toInt();
-    bool test=tmpVehicule.chercher(ID);
+
+    int id =ui->id->text().toInt();
+    bool test=tmpVehicule.chercher(id);
     if(test)
-    {ui->tableView_2->setModel(tmpVehicule.chercher(ID));//refresh
+    {
+        ui->tableView_2->setModel(tmpVehicule.chercher(id));//refresh
+
         QMessageBox::information(nullptr, QObject::tr("Recherche Terminer"),
                     QObject::tr("Recherche Terminer.\n"
                                 "Click Ok to close."), QMessageBox::Ok);
@@ -343,7 +379,7 @@ void MainWindow::on_Recherche_Vehicule_clicked()
     }
     else
         QMessageBox::critical(nullptr, QObject::tr("Recherche"),
-                    QObject::tr("Erreur!\n"
+                    QObject::tr("Vehicule non trouvé!\n"
                                 "Click Ok to close."), QMessageBox::Ok);
 }
 
@@ -355,15 +391,16 @@ void MainWindow::on_Recherche_Parking_clicked()
     int reff=ui->Reff->text().toInt();
     bool test=tmpParking.chercher(reff);
     if(test)
-    {ui->tableView->setModel(tmpParking.chercher(reff));//refresh
+    {
+        ui->tableView->setModel(tmpParking.chercher(reff));//refresh
+
         QMessageBox::information(nullptr, QObject::tr("Recherche Terminer"),
                     QObject::tr("Recherche Terminer.\n"
                                 "Click Ok to close."), QMessageBox::Ok);
-
     }
     else
         QMessageBox::critical(nullptr, QObject::tr("Recherche"),
-                    QObject::tr("Erreur!\n"
+                    QObject::tr("Parking non trouvé!\n"
                                 "Click Ok to close."), QMessageBox::Ok);
 }
 
@@ -391,6 +428,7 @@ void MainWindow::on_Trier_Parking_clicked()
     QMessageBox::information(nullptr, QObject::tr("Trier Parkings"),
     QObject::tr("Tri parkings terminé.\n"
     "Click ok to exit."), QMessageBox::Ok);
+
 }
 
 void MainWindow::on_Imprimer_Parking_clicked()
