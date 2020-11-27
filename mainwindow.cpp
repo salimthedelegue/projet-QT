@@ -1,11 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dialogpoubelles.h"
+#include "ui_dialogpoubelles.h"
+#include <QPixmap>
+#include <QLabel>
+#include<QMessageBox>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+     ui->setupUi(this);
+        QPixmap pix("C:/Users/Sana/Documents/untitled12/background.jpg");
+        ui->labelback_menu->setPixmap(pix.scaled(1366,768));
+
 }
 
 MainWindow::~MainWindow()
@@ -14,19 +23,12 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_pushButtonpoubelles_clicked()
 {
-    hide();
-  dialoguecapteur = new dialogueCapteur(this);
-  dialoguecapteur->show();
-}
 
+     Dialogpoubelles dialogpoubelles;
+     dialogpoubelles.setModal(true);
+     dialogpoubelles.exec();
 
-
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    hide();
-    dialoguedepartements=new  DialogDepartments (this);
-    dialoguedepartements->show();
 }

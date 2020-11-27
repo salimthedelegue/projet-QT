@@ -1,7 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "dialoguecapteur.h"
-#include"dialogdepartments.h"
 
 #include <QMainWindow>
 
@@ -20,12 +18,11 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_pushButtonpoubelles_clicked();
+
+    void on_pushButtondecharge_clicked();
 
 private:
     Ui::MainWindow *ui;
-    dialogueCapteur *dialoguecapteur;
-    DialogDepartments *dialoguedepartements;
-
 };
 #endif // MAINWINDOW_H

@@ -6,91 +6,96 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>963</width>
-    <height>536</height>
+    <width>1377</width>
+    <height>639</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="whatsThis">
-   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-image: url(:/new/prefix1/img/pngtree-blue-tech-smart-city-background-citysmart-citybanner-backgroundbackgroundbuildingbluecity-image_68303.jpg);</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QLabel" name="labelback_menu">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>160</y>
-      <width>421</width>
-      <height>71</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1366</width>
+      <height>768</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:white;
-borer-color:black;
-font-size:15px;
-font-style:bold;
-</string>
-    </property>
     <property name="text">
-     <string>GESTION DES CAPTEURS</string>
+     <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButtonpoubelles">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>290</y>
-      <width>421</width>
-      <height>71</height>
+      <x>600</x>
+      <y>320</y>
+      <width>300</width>
+      <height>100</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">color:white;
-font-size:15px;
-
-</string>
+    <property name="font">
+     <font>
+      <pointsize>17</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
-     <string>GESTION DES DEPARTEMENTS</string>
+     <string>GERER LES POUBELLES</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QPushButton" name="pushButtondecharge">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>450</y>
+      <width>300</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>GERER LA DECHARGE</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>280</y>
+      <width>371</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GroupBox</string>
+    </property>
+   </widget>
+   <zorder>groupBox</zorder>
+   <zorder>labelback_menu</zorder>
+   <zorder>pushButtonpoubelles</zorder>
+   <zorder>pushButtondecharge</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>963</width>
-     <height>26</height>
+     <width>1377</width>
+     <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menugestion_d_energie">
-    <property name="title">
-     <string>gestion d'energie</string>
-    </property>
-   </widget>
-   <addaction name="menugestion_d_energie"/>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
