@@ -16,11 +16,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButtonDecharge_clicked();
 
     void on_pushButtonpoubelles_clicked();
 
-    void on_pushButtondecharge_clicked();
+    //void on_pushButtondecharge_clicked();
 
 private:
     Ui::MainWindow *ui;

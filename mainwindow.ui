@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonpoubelles">
@@ -38,33 +38,18 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>17</pointsize>
+      <pointsize>19</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: grey;
+color:white;
+</string>
     </property>
     <property name="text">
      <string>GERER LES POUBELLES</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButtondecharge">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>450</y>
-      <width>300</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>GERER LA DECHARGE</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -80,10 +65,34 @@
      <string>GroupBox</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButtonDecharge">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>450</y>
+      <width>301</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:grey;
+color:white;</string>
+    </property>
+    <property name="text">
+     <string>GERER LA DECHARGE</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>labelback_menu</zorder>
    <zorder>pushButtonpoubelles</zorder>
-   <zorder>pushButtondecharge</zorder>
+   <zorder>pushButtonDecharge</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

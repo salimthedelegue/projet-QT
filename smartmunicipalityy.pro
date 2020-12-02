@@ -1,4 +1,6 @@
 QT       += core gui
+QT += sql
+QT += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,12 +14,17 @@ SOURCES += \
     dialogdecharge.cpp \
     dialogpoubelles.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    poubelle.cpp \
+    quantite.cpp
 
 HEADERS += \
+    connexionbd.h \
     dialogdecharge.h \
     dialogpoubelles.h \
-    mainwindow.h
+    mainwindow.h \
+    poubelle.h \
+    quantite.h
 
 FORMS += \
     dialogdecharge.ui \

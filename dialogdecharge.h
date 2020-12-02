@@ -15,6 +15,11 @@ public:
     explicit Dialogdecharge(QWidget *parent = nullptr);
     ~Dialogdecharge();
 
+private slots:
+    void on_pushButtonAnnulerDech_clicked();
+
+    void on_pushButtonEnregDech_clicked();
+
 private:
     Ui::Dialogdecharge *ui;
 };
