@@ -70,7 +70,7 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
             QRegularExpression numRe;
 
             numRe.setPattern(R"([1-9][0-9]*)");
-            if((numcap>10) && (!numRe.match(QString::number(numcap)).hasMatch())){
+            if((numcap==NULL) || (!numRe.match(QString::number(numcap)).hasMatch())){
                 isInputsValid=false;
                 ui->lineEdit_numcap->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
@@ -92,7 +92,7 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
             QRegularExpression longi;
 
             numRe.setPattern(R"(^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$)");
-            if(longtitude!=NULL && !longi.match(QString::number(longtitude)).hasMatch()){
+            if((longtitude==NULL) || (!longi.match(QString::number(longtitude)).hasMatch())){
                 isInputsValid=false;
                 ui->lineEdit_long->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
@@ -104,7 +104,7 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
             QRegularExpression lati;
 
             numRe.setPattern(R"(^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$)");
-            if(latitude!=NULL && !lati.match(QString::number(latitude)).hasMatch()){
+            if((latitude==NULL) || !lati.match(QString::number(latitude)).hasMatch()){
                 isInputsValid=false;
                 ui->lineEdit_lat->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
