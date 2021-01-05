@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>background.mp3</file>
+        <file>Bienvenue.mp3</file>
+        <file>mouse_click.wav</file>
+        <file>Parking_ajoute.mp3</file>
+        <file>Parking_modifie.mp3</file>
+        <file>Parking_supprime.mp3</file>
+        <file>Vehicule_ajoute.mp3</file>
+        <file>Vehicule_modifie.mp3</file>
+        <file>Vehicule_supprime.mp3</file>
+    </qresource>
+    <qresource prefix="/photos">
+        <file>Backgroud.jpg</file>
+    </qresource>
+</RCC>
