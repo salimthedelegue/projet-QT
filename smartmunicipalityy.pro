@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui charts
 QT += sql
 QT += printsupport
 
@@ -13,6 +13,7 @@ CONFIG += c++11
 SOURCES += \
     dialogdecharge.cpp \
     dialogpoubelles.cpp \
+    dialogstat.cpp \
     main.cpp \
     mainwindow.cpp \
     poubelle.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     connexionbd.h \
     dialogdecharge.h \
     dialogpoubelles.h \
+    dialogstat.h \
     mainwindow.h \
     poubelle.h \
     quantite.h
@@ -29,9 +31,15 @@ HEADERS += \
 FORMS += \
     dialogdecharge.ui \
     dialogpoubelles.ui \
+    dialogstat.ui \
     mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Images.qrc
+
+STATECHARTS +=

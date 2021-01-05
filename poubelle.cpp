@@ -10,18 +10,18 @@
 #include <QPrinter>
 #include<QTableView>
 #include<QDate>
-poubelle::poubelle(QString adresse,int numCap,float longitude,float latitude)
+poubelle::poubelle(QString adresse, int numCap, QString longitude, QString latitude, QString etat)
 {
     this->adresse= adresse;
     this->numCap=numCap;
     this->longitude=longitude;
     this->latitude=latitude;
-
+    this->etat=etat;
 }
 bool poubelle::enregistrer_poubelle(poubelle * pb)
 {
 QSqlQuery query;
-QString str= "insert into POUBELLE (longitude,latitude,num_capteur,adress) values("+QString::number( pb->getLongitude())+", "+QString::number(pb->getLatitude())+","+QString::number(+pb->getnumCap())+",'"+pb->getadresse()+"')" ;
+QString str= "insert into POUBELLE (longitude,latitude,num_capteur,adress,etat) values("+pb->getLongitude()+", "+pb->getLatitude()+","+QString::number(+pb->getnumCap())+",'"+pb->getadresse()+"','"+pb->getetat()+"')" ;
 qDebug()<<str;
 bool res1 = query.exec(str);
 return res1;
@@ -30,10 +30,13 @@ QSqlQueryModel * poubelle::afficher_poubelle()
 {
     QSqlQueryModel * model= new QSqlQueryModel();
     model->setQuery("select * from POUBELLE");
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("numCap"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("adresse"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Longitude"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Latitude"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("id_poubelle"));
+           model->setHeaderData(3, Qt::Horizontal, QObject::tr("date_modifiction"));
+           model->setHeaderData(4, Qt::Horizontal, QObject::tr("num_capteur"));
+           model->setHeaderData(5, Qt::Horizontal, QObject::tr("adresse"));
+           model->setHeaderData(1, Qt::Horizontal, QObject::tr("Longitude"));
+           model->setHeaderData(2, Qt::Horizontal, QObject::tr("Latitude"));
+           model->setHeaderData(6, Qt::Horizontal, QObject::tr("etat"));
 
 
     return model;
@@ -79,12 +82,28 @@ QSqlQueryModel * poubelle::afficher_poubelleRech(int Id)
     QSqlQueryModel * model= new QSqlQueryModel();
     QString str="select * from POUBELLE where Id_poubelle ="+QString::number(Id);
     model->setQuery(str);
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("numCap"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("adresse"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Longitude"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Latitude"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_poubelle"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Longitude"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Latitude"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date_modif"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("num_capteur"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("adress"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("etat"));
+
 
     return model;
+}
+//count lines
+int poubelle::countlines(QString etat){
+    QSqlQuery query;
+    int lines=0;
+     query.exec("select count(*) from POUBELLE where ETAT='"+etat+"'");
+    qDebug()<<"select count(*) from POUBELLE where ETAT='"+etat+"'";
+    while(query.next())
+    {
+    lines=query.value(0).toInt();
+    }
+     return(lines);
 }
 //suppmod
 poubelle::poubelle(int ID_poubelle)
@@ -106,25 +125,30 @@ void poubelle::Supprimer(int idp)
 {QSqlQuery query;
     query.exec("delete from POUBELLE where(ID_poubelle="+QString::number(idp)+")");
 }
-void poubelle::Modifier(int idp)
+void poubelle::Modifier()
 {QSqlQuery query;
-    query.exec("update POUBELLE Set numcap="+QString::number(getNouvnumCap())+",longitude="+QString::number(getNouvlongitude())+",latitude="+QString::number(getNouvlatitude())+",adresse='"+getNouvadresse()+"' where(id_poubelle="+QString::number(idp)+")");
+    query.exec("update POUBELLE Set num_capteur="+QString::number(getnumCap())+",longitude='"+getLongitude()+"',latitude='"+getLatitude()+"',adress='"+getadresse()+"',etat='"+getetat()+"'  where(id_poubelle="+QString::number(getId())+")");
+qDebug()<<"update POUBELLE Set num_capteur="+QString::number(getnumCap())+",longitude='"+getLongitude()+"',latitude='"+getLatitude()+"',adress='"+getadresse()+"',etat='"+getetat()+"' where(id_poubelle="+QString::number(getId())+")";
 }
-/*
-QSqlQueryModel * poubelle::Afficher(QString tripar, QString typetri)
-{QString tri="asc";
-    if(typetri=="Décroissant")tri="desc";
-    QSqlQueryModel * model= new QSqlQueryModel();
-    model->setQuery("select * from POUBELLE order by("+tripar+")"+tri+"");
 
+QSqlQueryModel * poubelle::Afficher(QString tripar, QString type_tri)
+{ QString selected_Tritype=(type_tri=="croissant")?"asc":"desc"; //the conditional operator or ternary(the operator ?:)
+   // if(Type_Tri=="decroissant")comboBox_Tri="desc";
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("select * from POUBELLE order by("+tripar+") "+selected_Tritype);
+qDebug()<<"select * from POUBELLE order by("+tripar+") "+selected_Tritype;
 model->setHeaderData(0, Qt::Horizontal, QObject::tr("id_poubelle"));
-       model->setHeaderData(1, Qt::Horizontal, QObject::tr("numCap"));
-       model->setHeaderData(2, Qt::Horizontal, QObject::tr("adresse"));
-       model->setHeaderData(3, Qt::Horizontal, QObject::tr("Longitude"));
-       model->setHeaderData(4, Qt::Horizontal, QObject::tr("Latitude"));
+       model->setHeaderData(3, Qt::Horizontal, QObject::tr("date_modifiction"));
+       model->setHeaderData(4, Qt::Horizontal, QObject::tr("num_capteur"));
+       model->setHeaderData(5, Qt::Horizontal, QObject::tr("adresse"));
+       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Longitude"));
+       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Latitude"));
+       model->setHeaderData(6, Qt::Horizontal, QObject::tr("etat"));
+
     return model;
 
 }
+/*
 QSqlQueryModel *poubelle::Rechercher_Afficher(int idp)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
@@ -146,29 +170,57 @@ QSqlQueryModel *poubelle::Actualiser_idpoubelle()
      return model;
 
 }
+*/
 
-QString poubelle::TrouverNumCap(int idp)
+poubelle* poubelle:: getPoubelleParId(int idp){
+    QSqlQuery query;
+
+        query.exec("Select * from POUBELLE where(ID_poubelle="+QString::number(idp)+")");
+        QSqlRecord rec = query.record();
+            poubelle* p= new poubelle();
+
+                    while (query.next())
+                    {
+                       // qDebug() << query.value(nameCol).toString(); // output all names
+                    //qDebug()<<"Select * from Poubelle where(id_poubelle="+QString::number(idp)+")";
+                   p->setnumCap( query.value(rec.indexOf("num_capteur")).toFloat());
+                   p->setAdress( query.value(rec.indexOf("adresse")).toString());
+                   p->setLatitude( query.value(rec.indexOf("latitude")).toString());
+                   p->setLongitude( query.value(rec.indexOf("longitude")).toString());
+                    p->setEtat( query.value(rec.indexOf("etat")).toString());
+                     p->setID_poubelle(query.value(rec.indexOf("ID_poubelle")).toInt());
+
+
+
+                    //rec.indexOf("adresse"),,rec.indexOf("Longitude"),rec.indexOf("Latitude"),rec.indexOf("etat"))
+                    }
+                    return p;
+
+}
+
+float poubelle::TrouverNumCap(int idp)
 { QSqlQuery query;
-    QString result;
-    query.exec("Select * from poubelle where(ID_poubelle="+QString::number(idp)+")");
+    float result;
+    query.exec("Select * from POUBELLE where(ID_poubelle="+QString::number(idp)+")");
     QSqlRecord rec = query.record();
 
     //aqDebug() << "Number of columns: " << rec.count();
 
-    int nameCol = rec.indexOf("ID_poubelle"); // index of the field "name"
+    int nameCol = rec.indexOf("num_capteur"); // index of the field "name"
     while (query.next())
     {
        // qDebug() << query.value(nameCol).toString(); // output all names
-    //qDebug()<<"Select * from poubelle where(ID_poubelle="+QString::number(ID_poubelle)+")";
-    result=query.value(nameCol).toString();
+    //qDebug()<<"Select * from Poubelle where(id_poubelle="+QString::number(idp)+")";
+    result=query.value(nameCol).toFloat();
     }
 
     return(result);
+
 }
-float poubelle::TrouverLongitude(int idp)
+QString poubelle::TrouverLongitude(int idp)
 { QSqlQuery query;
-    float result;
-    query.exec("Select * from poubelle where(ID_poubelle="+QString::number(idp)+")");
+    QString result;
+    query.exec("Select * from poubelle where(id_poubelle="+QString::number(idp)+")");
     QSqlRecord rec = query.record();
 
     //aqDebug() << "Number of columns: " << rec.count();
@@ -176,14 +228,30 @@ float poubelle::TrouverLongitude(int idp)
     int nameCol = rec.indexOf("Longitude"); // index of the field "name"
     while (query.next())
     {
-       // qDebug() << query.value(nameCol).toString(); // output all names
-    //qDebug()<<"Select * from poubelle where(ID_poubelle="+QString::number(idp)+")";
-    result=query.value(nameCol).toFloat();
+
+    result=query.value(nameCol).toString();
     }
 
     return(result);
-
 }
+    QString poubelle::TrouverLatitude(int idp)
+    { QSqlQuery query;
+        QString result;
+        query.exec("Select * from poubelle where(id_poubelle="+QString::number(idp)+")");
+        QSqlRecord rec = query.record();
+
+        //aqDebug() << "Number of columns: " << rec.count();
+
+        int nameCol = rec.indexOf("Latitude"); // index of the field "name"
+        while (query.next())
+        {
+
+        result=query.value(nameCol).toString();
+        }
+
+        return(result);
+    }
+
 QString poubelle::TrouverAdresse(int idp)
 { QSqlQuery query;
     QString result;
@@ -192,7 +260,25 @@ QString poubelle::TrouverAdresse(int idp)
 
     //aqDebug() << "Number of columns: " << rec.count();
 
-    int nameCol = rec.indexOf("Description"); // index of the field "name"
+    int nameCol = rec.indexOf("adress"); // index of the field "name"
+    while (query.next())
+    {
+
+    result=query.value(nameCol).toString();
+    }
+
+    return(result);
+
+}
+QString poubelle::TrouverEtat(int idp)
+{ QSqlQuery query;
+    QString result;
+    query.exec("Select * from poubelle where(id_poubelle="+QString::number(idp)+")");
+    QSqlRecord rec = query.record();
+
+    //aqDebug() << "Number of columns: " << rec.count();
+
+    int nameCol = rec.indexOf("etat"); // index of the field "name"
     while (query.next())
     {
 
@@ -201,16 +287,4 @@ QString poubelle::TrouverAdresse(int idp)
 
     return(result);
 }
-void poubelle::cmdentree(int idp)
-{ QSqlQuery query;
-    query.exec("update POUBELLE SET Quantite = Quantite + (SELECT Quantite_C from Contenir where poubelle.id_poubelle = Contenir.id_poubelle and Contenir.numcap='"+QString::number(idp)+"')where id_poubelle in (select id_poubelle from Contenir where Contenir.id_poubelle='"+QString::number(idp)+"')");
-}
 
-void poubelle::cmdsortie(int id)
-{
-    QSqlQuery query,quer;
-        query.exec("update poubelle SET Quantite = Quantite -(SELECT numcap from Utiliser where poubelle.id_poubelle = Utiliser.id_poubelle and Utiliser.id_Demande='"+QString::number(id)+"')where id_poubelle in (select id_poubelle from Utiliser where Utiliser.id_poubelle='"+QString::number(id)+"')");
-quer.exec("update Demande set id_respStock='"+QString::number(15)+"'where id_Demande='"+QString::number(id)+"'");
-}
-
-*/

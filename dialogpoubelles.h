@@ -3,6 +3,7 @@
 
 #include "QLineEdit"
 #include <QDialog>
+#include<poubelle.h>
 using namespace std;
 namespace Ui {
 class Dialogpoubelles;
@@ -15,6 +16,7 @@ class Dialogpoubelles : public QDialog
 public:
     explicit Dialogpoubelles(QWidget *parent = nullptr);
     ~Dialogpoubelles();
+
 
 private slots:
 
@@ -37,10 +39,13 @@ private slots:
 
     void on_rechercher_Pb_clicked();
 
-    void on_pushButtonImprimer_clicked();
+    void on_Afficher_Pb_clicked();
+
+    void on_pushButtonStatistiques_clicked();
 
 private:
     Ui::Dialogpoubelles *ui;
+    poubelle pou;
 };
 
 #endif // DIALOGPOUBELLES_H

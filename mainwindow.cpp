@@ -83,3 +83,57 @@ void MainWindow::on_pushButtonDecharge_clicked()
     dialogdecharge.setModal(true);
     dialogdecharge.exec();
 }
+/*QPieSeries *series = new QPieSeries();
+    series->append("Vides",40);
+    series->append("Pleines",20);
+    series->append("Hors service",15);
+
+   // Add label to 1st slice
+    QPieSlice *slice0 = series->slices().at(0);
+
+    slice0->setLabelVisible();
+
+
+    // Add label, explode and define brush for 2nd slice
+    QPieSlice *slice1 = series->slices().at(1);
+    slice1->setExploded();
+    slice1->setLabelVisible();
+    slice1->setPen(QPen(Qt::darkGreen, 2));
+    slice1->setBrush(Qt::green);
+
+    // Add labels to rest of slices
+    QPieSlice *slice2 = series->slices().at(2);
+    slice2->setLabelVisible();
+    //QPieSlice *slice3 = series->slices().at(3);
+    //slice3->setLabelVisible();
+    //QPieSlice *slice4 = series->slices().at(4);
+    //slice4->setLabelVisible();
+
+    // Create the chart widget
+    QChart *chart = new QChart();
+
+    // Add data to chart with title and hide legend
+    chart->addSeries(series);
+
+    chart->setTitle("STATISTIQUES POUBELLES");
+    //chart->legend()->setData();
+    chart->legend()->setAlignment(Qt::AlignBottom);
+
+    chart->legend()->setVisible(true);
+    series->setLabelsVisible();
+    series->setLabelsPosition(QPieSlice::LabelInsideHorizontal);
+
+    for(auto slice : series->slices())
+    slice->setLabel(QString("%1%").arg(100*slice->percentage(), 0, 'f', 1));
+
+    // Used to display the chart
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    QMainWindow window;
+
+    // Set the main window widget
+    window.setCentralWidget(chartView);
+    window.resize(420, 300);
+
+    window.show();
+    */
