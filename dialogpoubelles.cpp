@@ -17,8 +17,50 @@
 #include<QString>
 #include<QRadioButton>
 #include"poubelle.h"
+#include<iostream>
+#include <QApplication>
+#include "ui_dialogstat.h"
+#include "dialogstat.h"
 
 
+
+// The main window to which you add toolbars,
+// menubars, widgets and status bar
+#include <QtWidgets/QMainWindow>
+
+// Widget used to display charts
+#include <QtCharts/QChartView>
+
+// Used to draw bars representing data provided
+// grouped into categories
+#include <QtCharts/QBarSeries>
+
+// Represents 1 set of bars in a bar chart
+#include <QtCharts/QBarSet>
+
+// Displays the color used to represent each
+// QBarSet
+#include <QtCharts/QLegend>
+
+// Adds categories to the charts axes
+#include <QtCharts/QBarCategoryAxis>
+
+// Used to create stacked bar charts
+#include <QtCharts/QHorizontalStackedBarSeries>
+
+// Used to create a line chart
+#include <QtCharts/QLineSeries>
+
+// Used to change names on axis
+#include <QtCharts/QCategoryAxis>
+
+// Used to make Pie Charts
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+
+// Define the scope for your variables and functions
+QT_CHARTS_USE_NAMESPACE
+using namespace std;
 Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialogpoubelles)
@@ -35,6 +77,8 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
         ui->label_NouvAdresse->setVisible(false);
         ui->lineEditNouvAdresse->setVisible(false);
         ui->pushButtonSupMod->setEnabled(false);
+        ui->comboBox_Etatsupmod->setVisible(false);
+        ui->label_Etatsupmod->setVisible(false);
     //REGULAR EXP
     QRegExp num("[1-9][0-9]*");
     //QRegExpValidator *valinumcap=new QRegExpValidator(num,this);
@@ -56,14 +100,16 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
 
 
 }
+
     void Dialogpoubelles::on_pushButtonenregistrer_clicked(){
 
+       QString etat=ui->comboBox_etat->currentText();
         QString adresse= ui->lineEdit_adr->text();
          int numcap=ui->lineEdit_numcap->text().toInt();
-          float longtitude=ui->lineEdit_long->text().toFloat();
-            float latitude=ui->lineEdit_lat->text().toFloat();
+          QString longtitude=ui->lineEdit_long->text();
+            QString latitude=ui->lineEdit_lat->text();
 
-            poubelle*pb = new poubelle(adresse,numcap,longtitude,latitude);
+            poubelle*pb = new poubelle(adresse,numcap,longtitude,latitude,etat);
 
             // controle de saisie
             bool isInputsValid=true;
@@ -72,49 +118,65 @@ Dialogpoubelles::Dialogpoubelles(QWidget *parent) :
             numRe.setPattern(R"([1-9][0-9]*)");
             if((numcap==NULL) || (!numRe.match(QString::number(numcap)).hasMatch())){
                 isInputsValid=false;
+                qDebug()<<" num cap invalid";
                 ui->lineEdit_numcap->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
             }
             else{
-                ui->lineEdit_numcap->setStyleSheet("border:2px solid ;border-color:rgb(170, 85, 127);border-radius: 25% 10%; ");
+                ui->lineEdit_numcap->setStyleSheet("border:2px solid ;border-color:rgb(0,0,0);border-radius: 25% 10%; ");
             }
             QRegularExpression adr;
 
-            numRe.setPattern(R"(^2[0-5]{1},rue [a-z]{4,}$)");
+            adr.setPattern(R"(^2[0-5]{1},rue [a-z]{4,}$)");
             if((adresse!="") && !adr.match((adresse)).hasMatch()){
                 isInputsValid=false;
+                qDebug()<<" adress invalid";
                 ui->lineEdit_adr->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
             }
             else{
-                ui->lineEdit_adr->setStyleSheet("border:2px solid ;border-color:rgb(170, 85, 127);border-radius: 25% 10%;");
+                ui->lineEdit_adr->setStyleSheet("border:2px solid ;border-color:rgb(0,0,0);border-radius: 25% 10%;");
             }
             QRegularExpression longi;
 
-            numRe.setPattern(R"(^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$)");
-            if((longtitude==NULL) || (!longi.match(QString::number(longtitude)).hasMatch())){
+            longi.setPattern(R"(^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$)");
+            if((longtitude==NULL) || (!longi.match((longtitude)).hasMatch())){
                 isInputsValid=false;
+                qDebug()<<" logni invalid";
                 ui->lineEdit_long->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
             }
             else{
-                ui->lineEdit_long->setStyleSheet("border:2px solid ;border-color:rgb(170, 85, 127);border-radius: 25% 10%;");
+                ui->lineEdit_long->setStyleSheet("border:2px solid ;border-color:rgb(0,0,0);border-radius: 25% 10%;");
             }
 
             QRegularExpression lati;
 
-            numRe.setPattern(R"(^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$)");
-            if((latitude==NULL) || !lati.match(QString::number(latitude)).hasMatch()){
+            lati.setPattern(R"(^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$)");
+            if((latitude==NULL) || !lati.match((latitude)).hasMatch()){
                 isInputsValid=false;
+                qDebug()<<" lati invalid";
                 ui->lineEdit_lat->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
 
             }
             else{
-                ui->lineEdit_lat->setStyleSheet("border:2px solid ;border-color:rgb(170, 85, 127);border-radius: 25% 10%;");
+                ui->lineEdit_lat->setStyleSheet("border:2px solid ;border-color:rgb(0,0,0);border-radius: 25% 10%;");
             }
 
 
-            //
+            //compare return 0 if str1=str2
+          if(QString::compare(etat, "Veuiller choisir", Qt::CaseInsensitive)==0){
+              isInputsValid=false;
+              qDebug()<<" etat invalid";
+              ui->comboBox_etat->setStyleSheet("border:2px solid ;border-color: rgb(255, 0, 0);border-radius: 25% 10%;");
+
+          }
+          else{
+              ui->comboBox_etat->setStyleSheet("border:2px solid ;border-color:rgb(0, 0, 0);border-radius: 25% 10%;");
+          }
+
+
+
             if(isInputsValid==true){
                 if (pb->enregistrer_poubelle(pb))
                                 QMessageBox::information(0, qApp->tr("Enregistrer"),
@@ -146,7 +208,8 @@ void Dialogpoubelles::on_pushButtonAnnuler_clicked()
     ui->lineEdit_numcap->setText("");
     ui->lineEdit_long->setText("");
     ui->lineEdit_lat->setText("");
-    ui->lineEdit_adr->setText("   ");
+    ui->lineEdit_adr->setText("");
+
 }
 
 void Dialogpoubelles::on_pushButtonSupMod_clicked()
@@ -155,8 +218,13 @@ void Dialogpoubelles::on_pushButtonSupMod_clicked()
 
     rds=ui->radioButtonSupprimerPou->isChecked();
     rdm=ui->radioButtonModifierPou->isChecked();
-QString lab,desc;
+QString lineEditNouvLatitude,lineEditNouvAdresse,comboBox_Etatsupmod;
 int id=ui->lineEdit_Idsupmod->text().toInt();
+
+ui->lineEditNouvLatitude->text();
+ui->lineEditNouvLongitude->text();
+ui->comboBox_Etatsupmod->currentText();
+ui->lineEditNouvAdresse->text();
 poubelle *S=new poubelle(id);
 poubelle *M=new poubelle(id);
 
@@ -172,8 +240,14 @@ if(rds)
 
     else if(rdm){
     if(S->Rechercher(id)==1)
-    {
-        M->Modifier(id);
+    { M->setID_poubelle(id);
+        M->setnumCap(ui->lineEditNouvNumCap->text().toInt());
+        M->setAdress(ui->lineEditNouvAdresse->text());
+        M->setLongitude(ui->lineEditNouvLongitude->text());
+        M->setLatitude(ui->lineEditNouvLatitude->text());
+        M->setEtat(ui->comboBox_Etatsupmod->currentText());
+
+        M->Modifier();
         QMessageBox::warning(this,"Information","la poubelle est modifie");
     }}
 
@@ -195,8 +269,10 @@ void Dialogpoubelles::on_radioButtonModifierPou_clicked()
             ui->lineEditNouvLatitude->setVisible(true);
             ui->label_NouvAdresse->setVisible(true);
             ui->lineEditNouvAdresse->setVisible(true);
+            ui->label_Etatsupmod->setVisible(true);
+            ui->comboBox_Etatsupmod->setVisible(true);
 
-
+             ui->comboBox_Etatsupmod->setEnabled(true);
              ui->lineEditNouvNumCap->setEnabled(true);
               ui->lineEditNouvLongitude->setEnabled(true);
                ui->lineEditNouvAdresse->setEnabled(true);
@@ -204,7 +280,8 @@ void Dialogpoubelles::on_radioButtonModifierPou_clicked()
                 ui->pushButtonSupMod->setEnabled(true);
 
     }
-        else{
+        else{ui->label_Etatsupmod->setVisible(true);
+            ui->comboBox_Etatsupmod->setVisible(true);
             ui->label_Nouv_NumCap->setVisible(true);
             ui->lineEditNouvNumCap->setVisible(true);
             ui->label_NouvLongitude->setVisible(true);
@@ -214,7 +291,7 @@ void Dialogpoubelles::on_radioButtonModifierPou_clicked()
             ui->label_NouvAdresse->setVisible(true);
             ui->lineEditNouvAdresse->setVisible(true);
 
-
+             ui->comboBox_Etatsupmod->setEnabled(false);
              ui->lineEditNouvNumCap->setEnabled(false);
               ui->lineEditNouvLongitude->setEnabled(false);
                ui->lineEditNouvAdresse->setEnabled(false);
@@ -233,11 +310,14 @@ void Dialogpoubelles::on_radioButtonSupprimerPou_clicked(){
 
     int id=ui->lineEdit_Idsupmod->text().toInt();
         poubelle * S=new poubelle(id);
+        ui->comboBox_Etatsupmod->setVisible(false);
         ui->lineEditNouvNumCap->setVisible(false);
          ui->lineEditNouvLongitude->setVisible(false);
          ui->lineEditNouvLatitude->setVisible(false);
          ui->lineEditNouvAdresse->setVisible(false);
 
+
+         ui->label_Etatsupmod->setVisible(false);
          ui->label_Nouv_NumCap->setVisible(false);
          ui->label_NouvLatitude->setVisible(false);
          ui->label_NouvLongitude->setVisible(false);
@@ -263,11 +343,15 @@ void Dialogpoubelles::on_radioButtonSupprimerPou_clicked(){
                  ui->lineEditNouvLongitude->setEnabled(true);
                  ui->lineEditNouvLatitude->setEnabled(true);
                  ui->lineEditNouvAdresse->setEnabled(true);
+                 ui->comboBox_Etatsupmod->setEnabled(true);
                  ui->pushButtonSupMod->setEnabled(true);
+
+
 
          }
         else {QMessageBox::critical(this,"Erreur "," poubelle non trouvee ! ");
-             ui->lineEditNouvNumCap->setEnabled(true);
+             ui->lineEditNouvNumCap->setEnabled(false);
+             ui->comboBox_Etatsupmod->setEnabled(false);
              ui->lineEditNouvLongitude->setEnabled(false);
                  ui->lineEditNouvLatitude->setEnabled(false);
                  ui->lineEditNouvAdresse->setEnabled(false);
@@ -302,54 +386,101 @@ void Dialogpoubelles::on_rechercher_Pb_clicked()
         }
 }
 
-void Dialogpoubelles::on_pushButtonImprimer_clicked()
-{ poubelle *cmd= new poubelle();
-    ui->label_IdImp->setVisible(false);
-        ui->lineEdit_IdImprimer->setVisible(false);
-        ui->comboBoxPbId->setModel(cmd->Imprimerpou());
-       QPrinter printer(QPrinter::ScreenResolution);
-       printer.setPaperSize (QPrinter::A4);
-       //printer.setOutputFormat (QPrinter::PdfFormat);
-       //printer.setOrientation(QPrinter::Portrait);
-       printer.setFullPage(true);
-            QPainter painter;
-                    painter.begin(&printer);
-                   // QPixmap bck= QPixmap::grabWidget(ui->back);
-            painter.translate(0,-50);
-           // painter.drawPixmap(rect(),bck);
-                   // imprimercmd *w=new imprimercmd();
+void Dialogpoubelles::on_Afficher_Pb_clicked()
+{poubelle *tmpCl1= new poubelle();
+    QString t=ui->comboBox_Tri->currentText();
+    QString ty=ui->Type_Tri->currentText();
+ QSqlQueryModel *model =tmpCl1->Afficher(t,ty);
+ qDebug()<<"total rows" <<model->rowCount();
+    ui->tableView_Afficher->setModel(model);
+}
 
-                    QTableView* pTableView = new QTableView;
-                    pTableView->setModel(ui->tableViewImprimer->model());
+void Dialogpoubelles::on_lineEdit_Idsupmod_textChanged(const QString &arg1)
+{
 
-        /*    int wid=ui->tableView->width();
-           int hei=ui->tableView->height();
+    int id=ui->lineEdit_Idsupmod->text().toInt();poubelle * A=new poubelle(id);
 
-                    pTableView->setFixedSize(wid,hei);
-                    pTableView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                    pTableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+     if(A->Rechercher(id)==0)
+     {
+         ui->lineEdit_Idsupmod->setStyleSheet("background: red ");
+         ui->lineEditNouvNumCap->setVisible(false);
+         ui->lineEditNouvAdresse->setVisible(false);
+         ui->lineEditNouvLongitude->setVisible(false);
+         ui->lineEditNouvLatitude->setVisible(false);
+         ui->comboBox_Etatsupmod->setVisible(false);
+         ui->label_Nouv_NumCap->setVisible(false);
+         ui->label_Etatsupmod->setVisible(false);
+         ui->label_NouvLatitude->setVisible(false);
+         ui->label_NouvAdresse->setVisible(false);
+         ui->label_NouvLongitude->setVisible(false);
+         ui->pushButtonSupMod->setText("identifiant incorrect !!");
+         ui->pushButtonSupMod->setEnabled(false);
+ui->lineEditNouvNumCap->setEnabled(false);
+        }
+     else
+     {poubelle *pubelleFromDB =poubelle ::getPoubelleParId(id);
 
-    */
 
-         ui->tableViewImprimer->setFixedHeight(210+(30*cmd->nblignepou(ui->comboBoxPbId->currentText().toInt())));
-        ui->tableViewImprimer->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-         ui->tableViewImprimer->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+         ui->lineEditNouvNumCap->setText(QString::number(pubelleFromDB->getnumCap()));
+         ui->lineEditNouvAdresse->setText(pou.TrouverAdresse(id));
+         ui->lineEditNouvLatitude->setText(pou.TrouverLatitude(id));
+         ui->lineEditNouvLongitude->setText(pou.TrouverLongitude(id));
+         ui->comboBox_Etatsupmod->currentText()=pou.TrouverEtat(id);
+         ui->comboBox_Etatsupmod->setCurrentIndex(ui->comboBox_Etatsupmod->findText(pubelleFromDB->getetat()));//CurrentText(pubelleFromDB->getetat());
 
-                    painter.translate(180, 300);
 
-    ui->tableViewImprimer->render(&painter);
-     //pTableView->render(&painter);
-  QDate date=QDate::currentDate();
-     QString datetext= date.toString("dd.MMMM.yyyy");
-      ui->lineEdit_IdImprimer->setText("Nasrallah le:"+datetext);
-    //painter.begin(&printer);
-    painter.translate(70,-200);
-    ui->lineEdit_IdImprimer->render(&painter);
-    //painter.begin(&printer);
-    painter.translate(300,500);
-    //painter.drawPixmap(0,0,sig);
-    //this->close();
-    //poubelle *w =new poubelle();
-    //w->show();
 
+         ui->lineEdit_Idsupmod->setStyleSheet("background: white ");
+        ui->pushButtonSupMod->setEnabled(false);
+
+        if(ui->radioButtonModifierPou->isChecked()){
+             ui->lineEditNouvNumCap->setVisible(true);
+             ui->lineEditNouvAdresse->setVisible(true);
+             ui->lineEditNouvLatitude->setVisible(true);
+             ui->lineEditNouvLongitude->setVisible(true);
+             ui->comboBox_Etatsupmod->setVisible(true);
+
+
+             ui->label_Etatsupmod->setVisible(true);
+             ui->label_Nouv_NumCap->setVisible(true);
+             ui->label_NouvLatitude->setVisible(true);
+             ui->label_NouvLongitude->setVisible(true);
+             ui->label_NouvAdresse->setVisible(true);
+             ui->lineEditNouvNumCap->setVisible(true);
+             ui->lineEditNouvAdresse->setVisible(true);
+             ui->lineEditNouvLatitude->setVisible(true);
+             ui->lineEditNouvLongitude->setVisible(true);
+             ui->comboBox_Etatsupmod->setVisible(true);
+
+                 ui->pushButtonSupMod->setText("Modifier");
+                 ui->pushButtonSupMod->setEnabled(true);
+         }
+         if(ui->radioButtonSupprimerPou->isChecked()){ ui->lineEditNouvNumCap->setVisible(true);
+             ui->lineEditNouvAdresse->setVisible(false);
+             ui->label_NouvAdresse->setVisible(false);
+             ui->lineEditNouvLongitude->setVisible(false);
+             ui->label_NouvLongitude->setVisible(false);
+             ui->lineEditNouvLatitude->setVisible(false);
+             ui->label_NouvLatitude->setVisible(false);
+              ui->comboBox_Etatsupmod->setVisible(false);
+              ui->label_Etatsupmod->setVisible(false);
+              ui->lineEditNouvNumCap->setVisible(true);
+              ui->label_Nouv_NumCap->setEnabled(false);
+              ui->pushButtonSupMod->setEnabled(true);
+         ui->pushButtonSupMod->setText("Supprimer");
+
+
+         }
+         if(!(ui->radioButtonModifierPou->isChecked())&&!(ui->radioButtonSupprimerPou->isChecked()))ui->pushButtonSupMod->setText("Choisir une Option");
+     }
+
+
+
+}
+
+void Dialogpoubelles::on_pushButtonStatistiques_clicked()
+{
+ Dialogstat stat;
+ stat.setModal(true);
+ stat.exec();
 }

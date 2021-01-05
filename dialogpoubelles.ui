@@ -22,6 +22,29 @@
      <height>768</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTabWidget::tab-bar {
+   border: 1px solid gray;
+}
+QTabBar::tab {
+  background: gray;
+  color: white;
+  padding: 10px;
+ }
+
+ QTabBar::tab:selected {
+  background: lightgray;
+ }
+QTabWidget::pane { 
+   border: none;
+}</string>
+   </property>
    <property name="currentIndex">
     <number>2</number>
    </property>
@@ -45,10 +68,10 @@
     <widget class="QGroupBox" name="groupBox">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>230</y>
+       <x>310</x>
+       <y>210</y>
        <width>591</width>
-       <height>441</height>
+       <height>471</height>
       </rect>
      </property>
      <property name="font">
@@ -65,32 +88,36 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>120</y>
+        <y>110</y>
         <width>251</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Exp:20,rue med</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_adress">
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>130</y>
-        <width>71</width>
+        <y>120</y>
+        <width>81</width>
         <height>16</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Times New Roman</family>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -103,15 +130,15 @@ border-radius: 25% 10%;</string>
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>200</y>
-        <width>71</width>
+        <y>190</y>
+        <width>101</width>
         <height>21</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Times New Roman</family>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -124,24 +151,28 @@ border-radius: 25% 10%;</string>
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>190</y>
+        <y>180</y>
         <width>251</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Exp :50.246855</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_l">
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>270</y>
+        <y>260</y>
         <width>71</width>
         <height>20</height>
        </rect>
@@ -149,7 +180,7 @@ border-radius: 25% 10%;</string>
       <property name="font">
        <font>
         <family>Times New Roman</family>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -162,46 +193,63 @@ border-radius: 25% 10%;</string>
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>260</y>
+        <y>250</y>
         <width>251</width>
         <height>41</height>
        </rect>
       </property>
+      <property name="whatsThis">
+       <string/>
+      </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>20</number>
+      </property>
+      <property name="placeholderText">
+       <string>Exp :10.875664</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_numcap">
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>50</y>
+        <y>40</y>
         <width>251</width>
         <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
       <property name="maxLength">
        <number>3</number>
       </property>
+      <property name="placeholderText">
+       <string>number:20</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_numcap">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>60</y>
-        <width>91</width>
+        <x>90</x>
+        <y>50</y>
+        <width>111</width>
         <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Times New Roman</family>
-        <pointsize>12</pointsize>
+        <pointsize>13</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
@@ -214,7 +262,7 @@ border-radius: 25% 10%;</string>
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>360</y>
+        <y>390</y>
         <width>261</width>
         <height>51</height>
        </rect>
@@ -241,7 +289,7 @@ border-radius: 25% 10%;</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>360</y>
+        <y>390</y>
         <width>261</width>
         <height>51</height>
        </rect>
@@ -260,6 +308,75 @@ border-radius: 25% 10%;</string>
       <property name="text">
        <string>ANNULER</string>
       </property>
+     </widget>
+     <widget class="QLabel" name="label_etat">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>330</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Etat:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_etat">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>320</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid;
+border-color:rgb(0, 0, 0);
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+    color: rgb(220, 220, 220);
+    background-color:rgb(89, 155, 255);
+    margin: 0 0 0 0;</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Veuiller choisir</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Vide</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Pleine</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Hors service</string>
+       </property>
+      </item>
      </widget>
     </widget>
    </widget>
@@ -333,7 +450,8 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
      </widget>
@@ -354,6 +472,10 @@ border-radius: 25% 10%;</string>
         <italic>false</italic>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: grey;
+</string>
       </property>
       <property name="text">
        <string>Supprimer/Modifer</string>
@@ -394,6 +516,18 @@ border-radius: 25% 10%;</string>
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: grey;
+</string>
+      </property>
       <property name="text">
        <string>Valider</string>
       </property>
@@ -421,7 +555,8 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
      </widget>
@@ -435,7 +570,8 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
      </widget>
@@ -475,7 +611,8 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
      </widget>
@@ -489,7 +626,8 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
+       <string notr="true">border:2px solid;
+border-color: rgb(0,0,0);
 border-radius: 25% 10%;</string>
       </property>
      </widget>
@@ -506,6 +644,62 @@ border-radius: 25% 10%;</string>
        <string>Adresse</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_Etatsupmod">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Etat </string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_Etatsupmod">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>190</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+    color: rgb(220, 220, 220);
+    background-color:rgb(89, 155, 255);
+    margin: 0 0 0 0;</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Vide</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Pleine</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Hors service</string>
+       </property>
+      </item>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
@@ -521,6 +715,9 @@ border-radius: 25% 10%;</string>
        <height>768</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -528,7 +725,7 @@ border-radius: 25% 10%;</string>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>210</y>
        <width>591</width>
        <height>441</height>
@@ -541,6 +738,10 @@ border-radius: 25% 10%;</string>
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-color:white;
+</string>
      </property>
      <property name="title">
       <string>POUBELLE</string>
@@ -555,18 +756,29 @@ border-radius: 25% 10%;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
-border-radius: 25% 10%;</string>
+       <string notr="true">border-radius: 25% 10%;
+background:grey;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_IdRech">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>75</y>
+        <x>30</x>
+        <y>80</y>
         <width>131</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="text">
        <string>ID POUBELLE</string>
@@ -583,7 +795,10 @@ border-radius: 25% 10%;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border:2px solid color rgb(170, 85, 127);
-border-radius: 25% 10%;</string>
+border-radius: 25% 10%;
+background: QLinearGradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #eef, stop: 1 #ccf);
+
+</string>
       </property>
      </widget>
      <widget class="QPushButton" name="rechercher_Pb">
@@ -595,8 +810,18 @@ border-radius: 25% 10%;</string>
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>13</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">background-color: grey;
+       <string notr="true">border:2px solid;
+border-color:rgb(255, 255, 255);
+background-color: grey;
 </string>
       </property>
       <property name="text">
@@ -606,7 +831,7 @@ border-radius: 25% 10%;</string>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>370</x>
         <y>380</y>
         <width>201</width>
         <height>51</height>
@@ -628,130 +853,208 @@ border-radius: 25% 10%;</string>
       </property>
      </widget>
     </widget>
+    <widget class="QTableView" name="tableView_Afficher">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>390</y>
+       <width>571</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-radius: 25% 10%;
+background:grey;</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_Tri">
+     <property name="geometry">
+      <rect>
+       <x>830</x>
+       <y>280</y>
+       <width>181</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>13</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 1px solid;
+border-color:rgb(0, 0, 0);
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+    color: rgb(220, 220, 220);
+    background-color:rgb(89, 155, 255);
+    margin: 0 0 0 0;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>id_poubelle</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Num_capteur</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>etat</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_trierpar">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>280</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Trier par</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="Type_Tri">
+     <property name="geometry">
+      <rect>
+       <x>1080</x>
+       <y>280</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>13</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 1px solid;
+border-color:rgb(0, 0, 0);
+    border-radius: 3px;
+    padding: 1px 18px 1px 3px;
+    min-width: 6em;
+    color: rgb(220, 220, 220);
+    background-color:rgb(89, 155, 255);
+    margin: 0 0 0 0;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>croissant</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>decroissant</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="Afficher_Pb">
+     <property name="geometry">
+      <rect>
+       <x>950</x>
+       <y>330</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>13</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:2px solid;
+border-color:rgb(255, 255, 255);
+background-color: grey;
+</string>
+     </property>
+     <property name="text">
+      <string>Afficher</string>
+     </property>
+    </widget>
     <widget class="QGroupBox" name="groupBox_4">
      <property name="geometry">
       <rect>
-       <x>710</x>
+       <x>690</x>
        <y>210</y>
-       <width>591</width>
+       <width>641</width>
        <height>441</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Times New Roman</family>
-       <pointsize>14</pointsize>
+       <pointsize>13</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
-     <property name="title">
-      <string>Imprimer Poubelle</string>
+     <property name="styleSheet">
+      <string notr="true">border-color:white;
+</string>
      </property>
-     <widget class="QLabel" name="label_IdImp">
+     <property name="title">
+      <string>TRI POUBELLES</string>
+     </property>
+     <widget class="QPushButton" name="pushButtonStatistiques">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>50</y>
-        <width>101</width>
-        <height>31</height>
+        <x>220</x>
+        <y>380</y>
+        <width>271</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
+        <pointsize>13</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
-      <property name="text">
-       <string>ID poubelle</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_IdImprimer">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>50</y>
-        <width>171</width>
-        <height>31</height>
-       </rect>
-      </property>
       <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
-border-radius: 25% 10%;</string>
-      </property>
-      <property name="maxLength">
-       <number>3</number>
-      </property>
-     </widget>
-     <widget class="QTableView" name="tableViewImprimer">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>181</y>
-        <width>521</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border:2px solid color rgb(170, 85, 127);
-border-radius: 25% 10%;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_IDComBo">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>120</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>ID</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxPbId">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>110</y>
-        <width>171</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: grey;
+       <string notr="true">border:2px solid;
+border-color:rgb(255, 255, 255);
+background-color: grey;
 </string>
       </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonImprimer">
-      <property name="geometry">
-       <rect>
-        <x>380</x>
-        <y>380</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: grey;</string>
-      </property>
       <property name="text">
-       <string>Imprimer</string>
+       <string>STATISTIQUES</string>
       </property>
      </widget>
     </widget>
+    <zorder>labelbacmodif</zorder>
+    <zorder>groupBox_4</zorder>
+    <zorder>tableView_Afficher</zorder>
+    <zorder>comboBox_Tri</zorder>
+    <zorder>label_trierpar</zorder>
+    <zorder>Type_Tri</zorder>
+    <zorder>Afficher_Pb</zorder>
+    <zorder>groupBox_3</zorder>
    </widget>
   </widget>
  </widget>
