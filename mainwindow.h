@@ -22,6 +22,8 @@ private slots:
 
     //void on_pushButtondecharge_clicked();
 
+    void on_LiveRadio_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

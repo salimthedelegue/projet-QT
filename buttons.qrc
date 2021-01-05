@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>buttons/icon.png</file>
+        <file>buttons/IFM.png</file>
+        <file>buttons/jawharafm.png</file>
+        <file>buttons/jeunes.png</file>
+        <file>buttons/monastir.png</file>
+        <file>buttons/mosaique-fm.png</file>
+        <file>buttons/National.png</file>
+        <file>buttons/play.png</file>
+        <file>buttons/shemsfm.png</file>
+        <file>buttons/stop.png</file>
+    </qresource>
+</RCC>

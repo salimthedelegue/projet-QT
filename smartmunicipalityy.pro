@@ -1,6 +1,9 @@
 QT       += core gui charts
 QT += sql
 QT += printsupport
+QT += multimedia multimediawidgets
+QT += widgets
+QTPLUGIN += dsengine qtmedia_audioengine
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -40,6 +43,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    Images.qrc
+    Images.qrc \
+    buttons.qrc
 
 STATECHARTS +=
+
+DISTFILES += \
+    buttons/IFM.png \
+    buttons/National.png \
+    buttons/icon.png \
+    buttons/jawharafm.png \
+    buttons/jeunes.png \
+    buttons/monastir.png \
+    buttons/mosaique-fm.png \
+    buttons/play.png \
+    buttons/shemsfm.png \
+    buttons/stop.png

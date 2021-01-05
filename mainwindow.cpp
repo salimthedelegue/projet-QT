@@ -8,6 +8,8 @@
 #include "dialogdecharge.h"
 #include "ui_dialogdecharge.h"
 #include "connexionbd.h"
+#include "ui_liveradio.h"
+#include "liveradio.h"
 
 Connection ::Connection()
 {
@@ -137,3 +139,10 @@ void MainWindow::on_pushButtonDecharge_clicked()
 
     window.show();
     */
+
+void MainWindow::on_LiveRadio_clicked()
+{
+    liveradio live;
+
+    live.show();
+}

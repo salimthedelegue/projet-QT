@@ -89,10 +89,24 @@ color:white;</string>
      <string>GERER LA DECHARGE</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="LiveRadio">
+    <property name="geometry">
+     <rect>
+      <x>1260</x>
+      <y>10</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>LIVE Radio</string>
+    </property>
+   </widget>
    <zorder>groupBox</zorder>
    <zorder>labelback_menu</zorder>
    <zorder>pushButtonpoubelles</zorder>
    <zorder>pushButtonDecharge</zorder>
+   <zorder>LiveRadio</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
